@@ -1,0 +1,7 @@
+name: "Final Project (ei2262)"
+output_dir: "."
+navbar:
+  title: "Final Project"
+output:
+  html_document:
+    theme: sandstone

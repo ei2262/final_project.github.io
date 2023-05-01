@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>ei2262_Final_Project.knit</title>
+
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<img
+src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzJiNWM5OTM5NDFhZmViMDcwN2U5YjQ3NjgxM2M4ZDZiMzBiMmU2NiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/RdCz0iajXQotUzmTLd/giphy.gif" />
+<p>
+ 
+</p>
+<div id="final-project-description" class="section level1">
+<h1>Final Project Description</h1>
+<p>
+ 
+</p>
+<div id="option-and-dataset" class="section level2">
+<h2>Option and Dataset</h2>
+<p>For my final project, I have chosen Option #2: Explore a provided
+dataset for pre-specified research goals.</p>
+<p>The dataset I will be using is The Exposome and Health Datasets (used
+for class assignments).</p>
+</div>
+<div id="research-question" class="section level2">
+<h2>Research Question</h2>
+<p><em>Research Question: What features are important to reducing asthma
+prevalence?</em></p>
+<p>Importance to Public Health: By understanding what features are more
+important to reducing asthma prevalence, policies can be developed to
+target these features.</p>
+</div>
+<div id="analysis-plan" class="section level2">
+<h2>Analysis Plan</h2>
+To explore the research question, I will be comparing the performance of
+two machine learning algorithms:<br />
+
+<p>
+<ol style="list-style-type: decimal">
+<li>Classification Trees<br />
+</li>
+<li>Random Forest
+<p></li>
+</ol>
+<p>
+ 
+</p>
+</div>
+</div>
+<div id="preparing-exposome-dataset" class="section level1">
+<h1>Preparing Exposome Dataset</h1>
+<p>The <code>expo_final</code> dataset was loaded and merged to include
+features in the <code>exposome</code> and <code>phenotype</code>. This
+will allow me to explore all features that may be associated with asthma
+prevalence. The variable asthma (<code>hs_asthma</code>) represents
+individuals who responded to either having the outcome or not having the
+outcome at 6-11 years old. <code>hs_asthma</code> was changed to a
+factor variable and re-leveled to have “0” (No) as the reference group,
+which is necessary in the analysis portion.</p>
+<pre class="r"><code>load(&quot;./exposome.RData&quot;)
+
+expo_final &lt;- merge(exposome,phenotype,by=&quot;ID&quot;) %&gt;% 
+  merge(covariates, by=&quot;ID&quot;)
+
+# ID variable was stripped
+expo_final$ID &lt;- NULL
+
+# Removed any rows with missing data
+expo_final&lt;-na.omit(expo_final)
+
+# The outcome variable, asthma (hs_asthma), was changed to a factor variable and re-leveled to have &quot;0&quot; as the reference group
+expo_final$hs_asthma&lt;-as.factor(expo_final$hs_asthma)
+expo_final$hs_asthma&lt;-relevel(expo_final$hs_asthma, ref=&quot;0&quot;)</code></pre>
+<p>
+ 
+</p>
+</div>
+<div id="partitioning-data-into-training-and-testing-sets"
+class="section level1">
+<h1>Partitioning Data into Training and Testing Sets</h1>
+<p>The <code>expo_final</code> data was partitioned 70/30, with 70% in
+the training set and 30% in the testing set.</p>
+<pre class="r"><code>set.seed(123)
+
+train.indices&lt;-createDataPartition(y=expo_final$hs_asthma,p=0.7,list=FALSE)
+train.data&lt;-expo_final[train.indices, ]
+test.data&lt;-expo_final[-train.indices, ]</code></pre>
+<p>
+ 
+</p>
+</div>
+<div id="classification-trees" class="section level1">
+<h1>Classification Trees</h1>
+<p>A Classification Tree was used in this project to classify features
+based on whether they are high or low for asthma prevalence using all
+the features associated with exposures that may be associated with
+asthma prevalence. The outcome was binary, which eliminated the use of
+Regression Trees. The goal of using this algorithm was the examine and
+divide each feature included in the <code>expo_final</code> dataset. The
+complexity parameter (cp) was used to prune the trees and avoid
+overfitting. Tuning the cp allowed me to try to get the best prediction
+possible. The result of Classification Trees will be homogenous
+subgroups for asthma prevalence, which could be used to understand which
+features are most associated with asthma prevalence.</p>
+<p>A 10-fold cross-validation method and down-sampling was used. I also
+tested a sequence of cp parameters and got the best tune of 0.011.</p>
+<p>The accuracy of Classification Trees was 54.5%.</p>
+<pre class="r"><code>set.seed(123)
+
+# Created 10-fold cross-validation and using down-sampling
+expo.control.class &lt;- trainControl(method=&quot;cv&quot;, number=10, sampling=&quot;down&quot;)
+
+# Created sequence of cp parameters to try 
+grid.2 &lt;- expand.grid(cp=seq(0.001,0.1, by=0.001))
+
+# Train model
+expo_final_class &lt;- train(hs_asthma ~., data = train.data, method = &quot;rpart&quot;, trControl = expo.control.class, tuneGrid = grid.2)
+
+# Best Tune
+expo_final_class$bestTune</code></pre>
+<pre><code>##       cp
+## 11 0.011</code></pre>
+<pre class="r"><code># Confusion Matrix
+confusionMatrix(expo_final_class)</code></pre>
+<pre><code>## Cross-Validated (10 fold) Confusion Matrix 
+## 
+## (entries are percentual average cell counts across resamples)
+##  
+##           Reference
+## Prediction    0    1
+##          0 47.8  4.3
+##          1 41.2  6.7
+##                            
+##  Accuracy (average) : 0.545</code></pre>
+<p><br />
+</p>
+<div id="classification-tree-variable-of-importance"
+class="section level2">
+<h2>Classification Tree: Variable of Importance</h2>
+<p>Variable Importance is defined as “An overall measure of variable
+importance is the sum of the goodness of split measures for each split
+for which it was the primary variable.”</p>
+<p>The Classification Tree algorithm listed
+<code>hs_pm10_wk_hs_h_None</code> as the most important variable in
+understanding asthma prevalence. This variable is an outdoor exposure
+(air pollution), belongs in the PM10 subfamily, and represents the pm10
+value (extrapolated back in time using ratio method) one week before hs
+test at home. This value is collected in the postnatal period.</p>
+<pre class="r"><code># Obtained variable importance on the final model within training data
+varImp(expo_final_class)</code></pre>
+<pre><code>## rpart variable importance
+## 
+##   only 20 most important variables shown (out of 297)
+## 
+##                          Overall
+## hs_pm10_wk_hs_h_None      100.00
+## hs_pm10_dy_hs_h_None       77.89
+## hs_pfoa_m_Log2             72.30
+## hs_pfos_m_Log2             69.13
+## hs_cd_m_Log2               68.45
+## h_builtdens300_preg_Sqrt   57.73
+## h_pressure_preg_None       55.00
+## h_no2_ratio_preg_Log       54.23
+## h_abs_ratio_preg_Log       53.59
+## h_Benzene_Log              50.43
+## hs_sd_wk_None              39.09
+## hs_mep_cadj_Log2           33.30
+## hs_pm25_wk_hs_h_None       33.16
+## hs_bpa_cadj_Log2           30.07
+## hs_co_c_Log2               29.70
+## hs_mn_c_Log2               28.30
+## hs_mvpa_prd_alt_None       27.19
+## hs_connind300_s_Log        26.85
+## hs_KIDMED_None             22.86
+## hs_hg_m_Log2               22.83</code></pre>
+<p><br />
+</p>
+</div>
+<div id="classification-tree-visualization" class="section level2">
+<h2>Classification Tree: Visualization</h2>
+<p><br />
+</p>
+<div id="final-model-where-best-cp-tuningparameter-is-used."
+class="section level3">
+<h3>Final Model where best cp tuning/parameter is used.</h3>
+<pre class="r"><code>rpart.plot(expo_final_class$finalModel)</code></pre>
+<p><img src="ei2262_Final_Project_files/figure-html/unnamed-chunk-5-1.png" width="672" /><br />
+</p>
+</div>
+<div id="plot-of-variable-of-importance" class="section level3">
+<h3>Plot of Variable of Importance</h3>
+<p><em>Note</em>: The plot is restricted to the top 20 variables,
+representing at least 30% of importance.</p>
+<pre class="r"><code>plot(varImp(expo_final_class), top = 20)</code></pre>
+<p><img src="ei2262_Final_Project_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>
+ 
+</p>
+</div>
+</div>
+</div>
+<div id="random-forest" class="section level1">
+<h1>Random Forest</h1>
+<p>Using a random forest, randomly sampling was done with the features
+in the <code>expo_final</code> dataset created for this project. This
+method used moderately strong features to come up in the tree and make
+predictions. Random forests, compared to classification trees, provide
+an opportunity for all the features to contribute to predicting asthma
+prevalence. However, it is possible the strongest features may have been
+left out when creating the trees, which may have contributed to the
+lower accuracy.</p>
+<p>Unlike Classification Trees, Random Forest does not utilize pruning.
+The result of random forest will provide variable of importance, which
+will be interpreted to understand which features are most associated
+with asthma prevalence.</p>
+<p>A 10-fold cross-validation method and down-sampling was used. I also
+tested three different values of mtry and got the best tune of 120.</p>
+<p>The accuracy of Random Forest was 54.3%</p>
+<pre class="r"><code>set.seed(123)
+
+# Created 10-fold validation with down-sampling
+control.settings &lt;- trainControl(method=&quot;cv&quot;, number=10, sampling=&quot;down&quot;)
+
+# Tested three different values of mtry
+mtry.vals &lt;- c(ncol(train.data)-1, sqrt(ncol(train.data)-1), 0.5*ncol(train.data)-1)
+mtry.grid &lt;- expand.grid(.mtry=round(mtry.vals))
+
+# Train model
+expo_final_rf &lt;- train(hs_asthma ~., data = train.data, method = &quot;rf&quot;, metric = &quot;Accuracy&quot;, tuneGrid = mtry.grid, trControl = control.settings, ntree=100)
+
+# Best Tune
+expo_final_rf$bestTune</code></pre>
+<pre><code>##   mtry
+## 2  120</code></pre>
+<pre class="r"><code># Confusion Matrix
+confusionMatrix(expo_final_rf)</code></pre>
+<pre><code>## Cross-Validated (10 fold) Confusion Matrix 
+## 
+## (entries are percentual average cell counts across resamples)
+##  
+##           Reference
+## Prediction    0    1
+##          0 47.9  4.6
+##          1 41.1  6.4
+##                             
+##  Accuracy (average) : 0.5428</code></pre>
+<p>
+ 
+</p>
+<div id="random-forest-variable-of-importance" class="section level2">
+<h2>Random Forest: Variable of Importance</h2>
+<p>Variable Importance is defined as “An overall measure of variable
+importance is the sum of the goodness of split measures for each split
+for which it was the primary variable.”</p>
+<p>The Random Forest algorithm listed <code>h_no2_ratio_preg_Log</code>
+as the most important variable in understanding asthma prevalence. This
+variable is an outdoor exposure (air pollution), belongs in the NO2
+subfamily, and represents the NO2 value (extrapolated back in time using
+ratio method) during pregnancy. This value is collected during
+pregnancy.</p>
+<pre class="r"><code>varImp(expo_final_rf)</code></pre>
+<pre><code>## rf variable importance
+## 
+##   only 20 most important variables shown (out of 296)
+## 
+##                          Overall
+## h_no2_ratio_preg_Log      100.00
+## hs_hg_m_Log2               70.57
+## hs_ndvi100_s_None          68.30
+## hs_mecpp_madj_Log2         56.56
+## hs_mn_c_Log2               52.07
+## hs_dep_cadj_Log2           51.37
+## h_distinvnear1_preg_Log    48.19
+## hs_pbde47_madj_Log2        46.48
+## hs_child_age_None          44.95
+## hs_co_c_Log2               44.66
+## h_popdens_preg_Sqrt        43.59
+## h_Benzene_Log              42.47
+## hs_dmtp_cadj_Log2          41.47
+## hs_landuseshan300_h_None   41.45
+## hs_cd_m_Log2               40.12
+## hs_mecpp_cadj_Log2         39.96
+## h_thm_preg_Log             39.09
+## h_abs_ratio_preg_Log       37.37
+## hs_bupa_cadj_Log2          36.38
+## hs_pm25_yr_hs_h_None       35.64</code></pre>
+<p><br />
+</p>
+</div>
+<div id="random-forest-visualization" class="section level2">
+<h2>Random Forest: Visualization</h2>
+<p><br />
+</p>
+<div id="plot-of-variable-of-importance-1" class="section level3">
+<h3>Plot of Variable of Importance</h3>
+<p><em>Note</em>: The plot is restricted to the top 20 variables,
+representing at least 30% of importance.</p>
+<pre class="r"><code>plot(varImp(expo_final_rf), top=20)</code></pre>
+<p><img src="ei2262_Final_Project_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>
+ 
+</p>
+</div>
+</div>
+</div>
+<div id="prediction" class="section level1">
+<h1>Prediction</h1>
+<p>To perform prediction on the testing set, I used the Classification
+Tree model. This model provided the higher accuracy (54.5%), although it
+is not the ideal model to understand the features that are associated
+with asthma prevalence.</p>
+<p>The prediction model had an accuracy of 57.07%.</p>
+<pre class="r"><code>set.seed(123)
+
+expo_final_pred &lt;- predict(expo_final_class, newdata = test.data)
+
+confusionMatrix(expo_final_pred, test.data$hs_asthma, positive = &quot;1&quot;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   0   1
+##          0 203  23
+##          1 144  19
+##                                           
+##                Accuracy : 0.5707          
+##                  95% CI : (0.5198, 0.6205)
+##     No Information Rate : 0.892           
+##     P-Value [Acc &gt; NIR] : 1               
+##                                           
+##                   Kappa : 0.0165          
+##                                           
+##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
+##                                           
+##             Sensitivity : 0.45238         
+##             Specificity : 0.58501         
+##          Pos Pred Value : 0.11656         
+##          Neg Pred Value : 0.89823         
+##              Prevalence : 0.10797         
+##          Detection Rate : 0.04884         
+##    Detection Prevalence : 0.41902         
+##       Balanced Accuracy : 0.51870         
+##                                           
+##        &#39;Positive&#39; Class : 1               
+## </code></pre>
+<div id="prediction-visualization" class="section level2">
+<h2>Prediction: Visualization</h2>
+<p>I created predictions as probabilities on the test set. The
+<code>pre_expo_prob</code> dataframe contains the probability of being a
+feature associated with asthma probability vs. being a feature not
+associated with asthma probability.</p>
+<pre class="r"><code>set.seed(123)
+pred_expo_prob&lt;-predict(expo_final_class, test.data, type=&quot;prob&quot;)
+
+analysis &lt;- roc(response = test.data$hs_asthma, predictor = pred_expo_prob[,2])</code></pre>
+<pre><code>## Setting levels: control = 0, case = 1</code></pre>
+<pre><code>## Setting direction: controls &lt; cases</code></pre>
+<pre class="r"><code>plot(1-analysis$specificities,analysis$sensitivities,type=&quot;l&quot;,
+ylab=&quot;Sensitivity&quot;,xlab=&quot;1-Specificity&quot;,col=&quot;black&quot;,lwd=2,
+main = &quot;ROC Curve for Astham Prevalence&quot;)
+abline(a=0,b=1)</code></pre>
+<p><img src="ei2262_Final_Project_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>Using merged dataset <code>expo_final</code> used, the Classification
+Trees algorithm had a slightly higher accuracy and was used for final
+predictions. The accuracy using the testing set was 57.07%. The
+Classification Tree found the variable of importance with the highest
+importance to prediction was hs_pm10_wk_hs_h_None, the pm10 levels
+recorded post-natally.</p>
+<p>A key limitation to this analysis is the accuracy produced from this
+algorithm is still relatively low. Only two machine learning algorithms
+were compared to understand what features are most important to asthma
+prevalence. Other algorithms may be used to achieve higher accuracy and
+gain a better understanding on what features are most associated with
+asthma prevalence.</p>
+</div>
+<div id="thank-you" class="section level1">
+<h1>Thank You!</h1>
+<p>Thank you for a wonderful semester!</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
